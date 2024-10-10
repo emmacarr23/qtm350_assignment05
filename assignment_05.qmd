@@ -1,0 +1,72 @@
+---
+title: "World Development Indicators"
+author: 'Emma Carrier'
+date: '10/09/24'
+echo: false
+output:
+    html: default
+    pdf: default
+bibliography: references.bib
+---
+
+## Introduction
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+wdi = pd.read_csv('wdi.csv')
+```
+
+# GDP per Capita
+GDP per capita is a country's GDP divided by its total population [@worldometer_gdp]. From the 203 countries with data on GDP per capita, the mean is $20345.71. The GDP per capita between different countries vary greatly, with the maximum being $240862.18 and the minimum being $259.03
+```{python}
+gdp_per_capita = wdi['gdp_per_capita'].describe()
+gdp_per_capita
+```
+
+# Inflation Rate
+The inflation rate in a country is the increase in prices over a given period of time [@oner_inflation]. The average inflation rate in th 169 observed countries is 12.5%. Some countries have an inflation rate in the negatives, with the minimum value in this dataset being -6.69%
+```{python}
+inflation_rate = wdi['inflation_rate'].describe()
+inflation_rate
+```
+
+# Measles Immunization Rates
+Measles is an extremely deadly disease that has affected many nations for centuries. The rate at which the populations in a country are vaccinated for measles is greatly important to the overall health of the population. From the observed 193 countries, the average measles vaccination rate is 83.85%.
+```{python}
+measles_immunization = wdi['measles_immunisation_rate'].describe()
+measles_immunization
+```
+
+# GDP Growth Rate
+The GDP growth rate measures how fast a country's economy is growing / shrinking each year. This visualization compares a country's growth rate and it's GDP per capita in the year 2022. From the graph, it appears that many of the countries that have higher GDPs do not have either a high or low GDP growth rate.
+```{python}
+plt.figure(figsize=(10,6))
+plt.bar(wdi['gdp_growth_rate'], wdi['gdp_per_capita'])
+plt.title('GDP Growth Rate vs GDP per Capita')
+plt.xlabel('GDP Growth Rate (%)')
+plt.ylabel('GDP per Capita (USD)')
+plt.tight_layout()
+plt.show()
+```
+Figure 1: a bar chart showing the GDP Growth Rate vs GDP per Capita. Source: [@worldbank_wdi]
+
+# Measles Immunisation Rate vs Life Expectancy
+This graph compares the percentage of the popualtion in a country that has received an immunisation from measles. According to the data, countries that have a higher percentage of their population vaccinated for measles, the average life expectancy is higher.
+```{python}
+plt.figure(figsize=(10,6))
+plt.scatter(wdi['measles_immunisation_rate'], wdi['life_expectancy'])
+plt.title('Measles Immunization Rate vs Life Expectancy')
+plt.xlabel('Measles Immunization Rates (%)')
+plt.ylabel('Life Expectancy (years)')
+plt.tight_layout
+plt.show()
+```
+Figure 2: a scatter plot showing the Measles Immunization rate vs Life Expectancy. Source: [@worldbank_wdi]
+
+# Key Findings and Statistics
+```{python}
+summary_stats = wdi[['measles_immunisation_rate', 'gdp_growth_rate', 'inflation_rate']].describe()
+summary_stats
+```

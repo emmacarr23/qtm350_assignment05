@@ -1,0 +1,60 @@
+---
+title: 'World Development Indicators'
+author: 'Emma Carrier'
+date: '10/09/24'
+format: 
+    revealjs:
+        theme: solarized
+        transition: fade
+bibliography: references.bib
+---
+
+## Introduction
+
+This presentation investigates the relationship between several variables from the World Development Indicators list. Some of these variables include GDP per Capita, Measles Vaccination Percentages, and Inflation Rates.
+
+---
+
+## GDP Growth Rate
+The GDP growth rate measures how fast a country's economy is growing / shrinking each year.
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+wdi = pd.read_csv('wdi.csv')
+plt.figure(figsize=(10,6))
+plt.bar(wdi['gdp_growth_rate'], wdi['gdp_per_capita'])
+plt.title('GDP Growth Rate vs GDP per Capita')
+plt.xlabel('GDP Growth Rate (%)')
+plt.ylabel('GDP per Capita (USD)')
+plt.tight_layout()
+plt.show()
+```
+
+--- 
+
+## Measles Immunisation Rate vs Life Expectancy
+This graph compares the percentage of the popualtion in a country that has received an immunisation from measles.
+```{python}
+plt.figure(figsize=(10,6))
+plt.scatter(wdi['measles_immunisation_rate'], wdi['life_expectancy'])
+plt.title('Measles Immunization Rate vs Life Expectancy')
+plt.xlabel('Measles Immunization Rates (%)')
+plt.ylabel('Life Expectancy (years)')
+plt.tight_layout
+plt.show()
+```
+
+---
+
+## Inflation Rate Statistics
+```{python}
+summary_stats = wdi[['measles_immunisation_rate', 'gdp_growth_rate', 'inflation_rate']].describe()
+summary_stats
+```
+
+---
+
+## Conclusion
+- Wide Variance in GDP per Capita: Countries show significant disparities in GDP per capita, with the highest value being over $240,000 and the lowest under $300. This reflects a broad economic divide between nations.
+
+- Higher Measles Immunization Correlates with Longer Life Expectancy: The data indicates that countries with higher measles immunization rates tend to have higher average life expectancy, underscoring the health benefits of vaccination programs.
