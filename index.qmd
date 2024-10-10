@@ -1,5 +1,5 @@
 ---
 Title: Assignment 05
 ---
-[Link Text](assignment_05.html)
-[Link Text](presentation.html)
+[Report](assignment_05.html)
+[Presentation](presentation.html)
